@@ -29,7 +29,8 @@ In a browser type in the address of your game Example: *https://www.gameexample.
     Code review:
     
     Other guidelines:
-    See something in the code that should be changed or want to add a new feature open a pull request. When you contribute to code please add your name to the contributors list. 
+    See something in the code that should be changed or want to add a new feature open a pull request. 
+    When you contribute to code please add your name to the contributors list. 
 
 # Who do I talk to?
 
