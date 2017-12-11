@@ -1,5 +1,5 @@
 /**
- * ExEngine: encryption.js
+ * ExEngine: chat.js
  * Version: 1.0.0
  * Author: Sarlecc
  * Contributors:
