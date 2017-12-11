@@ -3,6 +3,7 @@
  * Version: 2.0.0
  * Author: Sarlecc
  * Contributors:
+ * Patreons: Rastos
  * License: Copyright <2017> <Mythical Games (Nathan Morris aka Sarlecc)>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
