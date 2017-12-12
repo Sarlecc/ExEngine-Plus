@@ -22,6 +22,37 @@ go to the config directory of the game use command node config.js configure all 
 Go back to the games main directory use command node index.js
 
 In a browser type in the address of your game Example: *https://www.gameexample.com
+
+# APIs
+# API Chat
+Send a global text message:
+```javascript 
+socket.emit('sendChat', 'string');
+```
+
+Recieve a global text message
+```javascript 
+/**
+data.name: 'name of sender'
+data.text: 'message'
+*/
+socket.on('recieveChat', function (data) {...});
+```
+
+Send private message:
+
+```javascript 
+socket.emit('sendPrivate', 'to', 'message');
+```
+
+Recieve a private message
+```javascript
+/**
+data.name: 'name of sender'
+data.text: 'message'
+*/
+socket.on('recievePrivate', function (data) {...});
+```
 # Contribution guidelines
 
     Writing tests:
