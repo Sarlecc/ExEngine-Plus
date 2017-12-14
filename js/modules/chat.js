@@ -1,6 +1,6 @@
 /**
  * ExEngine: chat.js
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Sarlecc
  * Contributors:
  * License: Copyright <2017> <Mythical Games (Nathan Morris aka Sarlecc)>
@@ -27,12 +27,12 @@ module.exports = function (main, users) {
 
     main.io.on('connection', function (socket) {
         socket.on('sendChat', function(data) {
-  	        main.io.emit('recieveChat', {name: users[socket.id], text: data});
+  	        main.io.emit('receiveChat', {name: users[socket.id], text: data});
         });
 
         socket.on('privateChat', function(name, data) {
             var id = Object.keys(users).find(key => users[key] === name);
-            socket.to(id).emit('recievePrivate', {name: users[socket.id], text: data});
+            socket.to(id).emit('receivePrivate', {name: users[socket.id], text: data});
         });
 
         
