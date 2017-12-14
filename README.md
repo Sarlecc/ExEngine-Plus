@@ -30,13 +30,13 @@ Send a global text message:
 socket.emit('sendChat', 'string');
 ```
 
-Recieve a global text message
+Receive a global text message
 ```javascript 
 /**
 data.name: 'name of sender'
 data.text: 'message'
 */
-socket.on('recieveChat', function (data) {...});
+socket.on('receiveChat', function (data) {...});
 ```
 
 Send private message:
@@ -45,16 +45,30 @@ Send private message:
 socket.emit('sendPrivate', 'to', 'message');
 ```
 
-Recieve a private message
+Receive a private message
 ```javascript
 /**
 data.name: 'name of sender'
 data.text: 'message'
 */
-socket.on('recievePrivate', function (data) {...});
+socket.on('receivePrivate', function (data) {...});
 ```
 # API metrics
+Receive skill data
+```javascript
+/**
+request.name: 'name of actor or enemy'
+request.collection: 'name of collection you are accessing'
 
+data.skills: array of objects
+data.skills[i].id: skill id
+data.skills[i].name: skill name
+data.skills[i].uses: skill uses
+data.skills[i].skillDamage: array of damage
+data.skills[i].avgTargets: array of targets
+*/
+socket.emit('retrieveData', request, function (data) {...})
+```
 # Contribution guidelines
 
     Writing tests:
