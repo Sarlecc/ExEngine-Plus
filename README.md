@@ -53,6 +53,8 @@ data.text: 'message'
 */
 socket.on('recievePrivate', function (data) {...});
 ```
+# API metrics
+
 # Contribution guidelines
 
     Writing tests:
