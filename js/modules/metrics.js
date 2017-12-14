@@ -1,6 +1,6 @@
 /**
  * ExEngine: metrics.js
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Sarlecc
  * Contributors:
  * License: Copyright <2017> <Mythical Games (Nathan Morris aka Sarlecc)>
@@ -31,8 +31,8 @@ module.exports = function (main) {
         /**
          * save skill data
          */
-        //TODO remove all cases of user from functions and use the users object instead.
-        socket.on('save skill data', function (data, user) {
+        //TODO use log.js to log messages instead of console.log
+        socket.on('saveSkillData', function (data) {
             var db = main.mongo.db('mongodb://' + main.admin.user + ':' + main.admin.pass + '@' +
                 main.dbHost + ':' + main.dbPort + '/multiplayer');
             var info = data;
@@ -51,32 +51,32 @@ module.exports = function (main) {
                     });
                 } else {
                     for (var i = 0; i < item.skills.length; i++) {
-                        if (item.skills[i][0] === info.skills[0][0]) {
-                            item.skills[i][2] += 1;
-                            if (item.skills[i][3].length === 10) {
-                                item.skills[i][3].shift();
-                                item.skills[i][3].push(info.skills[0][3][0]);
+                        if (item.skills[i].id === info.skills[0].id) {
+                            item.skills[i].uses += 1;
+                            if (item.skills[i].skillDamage.length === 10) {
+                                item.skills[i].skillDamage.shift();
+                                item.skills[i].skillDamage.push(info.skills[0].skillDamage);
                             } else {
-                                item.skills[i][3].push(info.skills[0][3][0]);
+                                item.skills[i].skillDamage.push(info.skills[0].skillDamage);
                             }
-                            if (item.skills[i][4].length === 10) {
-                                item.skills[i][4].shift();
-                                item.skills[i][4].push(info.skills[0][4][0]);
+                            if (item.skills[i].avgTargets.length === 10) {
+                                item.skills[i].avgTargets.shift();
+                                item.skills[i].avgTargets.push(info.skills[0].avgTargets);
                             } else {
-                                item.skills[i][4].push(info.skills[0][4][0]);
+                                item.skills[i].avgTargets.push(info.skills[0].avgTargets);
                             }
                             saved = true;
                             break;
                         }
                     }
                     if (saved === false) {
-                        item.skills.push([
-                            info.skills[0][0],
-                            info.skills[0][1],
-                            info.skills[0][2],
-                            [info.skills[0][3][0]],
-                            [info.skills[0][4][0]]
-                        ]);
+                        item.skills.push([{
+                            id: info.skills[0].id,
+                            name: info.skills[0].name,
+                            uses: info.skills[0].uses,
+                            skillDamage: [info.skills[0].skillDamage],
+                            avgTargets: [info.skills[0].avgTargets]
+                        }]);
                         saved = true;
                     }
 
@@ -94,7 +94,7 @@ module.exports = function (main) {
         /**
          * retrieve skill data
          */
-        socket.on('retrieve data', function (request, fnd) {
+        socket.on('retrieveData', function (request, fnd) {
             var db = main.mongo.db('mongodb://' + main.admin.user + ':' + main.admin.pass + '@' +
                 dbHost + ':' + main.dbPort + '/multiplayer');
             var info = request;
